@@ -36,19 +36,37 @@ function operate(operator, a, b) {
     }
 }
 
+//Updating display
+function updateDisplay(method, newNumber) {
+    switch(method) {
+        case 'numberPress':
+            calculatorDisplay.textContent += newNumber.toString();
+            break;
+        case 'resolveOperation':
+            calculatorDisplay.textContent = newNumber.toString();
+            break;
+        case 'clearDisplay':
+            calculatorDisplay.textContent = "";
+            break;
+    }
+}
+
 //Default page load
     //TODO - Define default behaviour
 function loadDefault() {
-    console.log("test");
+    numberButtons.forEach(element => element
+        .addEventListener('click', e => updateDisplay('numberPress', e.target.textContent)
+   ));
+
+
+    operatorButtons.forEach(element => element.addEventListener('click', e => console.log(e.target.textContent)));
 }
 
+loadDefault();
+
 //Add event listeners for inputs
-numberButtons.forEach(element => element.addEventListener('click', e => console.log(e.target.textContent)));
-operatorButtons.forEach(element => element.addEventListener('click', e => console.log(e.target.textContent)));
 
 
-let displayNumber = "1";
-calculatorDisplay.textContent = displayNumber;
 
 /*
 Create the functions that populate the display when you click the number buttons… 

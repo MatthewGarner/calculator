@@ -1,0 +1,111 @@
+* {
+    text-align: center;
+    font-family: 'Teko', sans-serif;
+    box-sizing: border-box;
+}
+
+.calculator-button {
+    border-color: indigo;
+    border-style: solid;
+    margin: 2% 10px 10px 2%;
+    align-content: center;
+    justify-content: center;
+  
+}
+
+.number-input {
+    background-color: rgb(206, 197, 197);
+}
+
+.operator-input {
+    background-color: rgb(221, 126, 48);
+}
+
+#main-container {
+    width: 100%;
+}
+
+#calculator {
+    width: 800px;
+    margin: 10vmin auto;
+    /*background-color: rgb(207, 241, 236);*/
+    /*border-style: solid;*/
+    
+}
+
+#calculator-pad {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: repeat(5, auto);
+    font-size: 8vh;
+}
+
+#calculator-output {
+    background-color: black;
+    border-style: solid;
+    border-color: orange;
+    color: white;
+    font-size: 9vh;
+    padding: 0.5em 0 0.5em 0;
+    margin-bottom: 5vmin;
+}
+
+#button-1 {
+    grid-area: 4 / 1 / span 1 / span 1;
+}
+
+#button-2 {
+    grid-area: 4 / 2 / span 1 / span 1;
+}
+
+#button-3 {
+    grid-area: 4 / 3 / span 1 / span 1;
+}
+
+#button-4 {
+    grid-area: 3 / 1 / span 1 / span 1;
+}
+
+#button-5 {
+    grid-area: 3 / 2 / span 1 / span 1;
+}
+
+#button-6 {
+    grid-area: 3 / 3 / span 1 / span 1;
+}
+
+#button-7 {
+    grid-area: 2 / 1 / span 1 / span 1;
+}
+
+#button-8 {
+    grid-area: 2 / 2 / span 1 / span 1;
+}
+
+#button-9 {
+    grid-area: 2 / 3 / span 1 / span 1;
+}
+
+#button-0 {
+    grid-area: 5 / 1 / span 1 / span 2;
+}
+
+#button-divide {
+    grid-area: 1 / 4 / span 1 / span 1;
+}
+
+#button-multiply {
+    grid-area: 2 / 4 / span 1 / span 1;
+}
+
+#button-add {
+    grid-area: 4 / 4 / span 1 / span 1;
+}
+
+#button-subtract {
+    grid-area: 3 / 4 / span 1 / span 1;
+}
+
+#button-equals {
+    grid-area: 5 / 4 / span 1 / span 1;
+}

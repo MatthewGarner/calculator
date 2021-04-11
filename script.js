@@ -23,6 +23,10 @@ function multiply (a, b) {
 }
 
 function divide (a, b) {
+    if (b == 0){
+        alert('You cannot divide by zero');
+        return;
+    }
     return a / b;
 }
 
@@ -36,10 +40,14 @@ function operate(operator, a, b) {
         case "*":
             return multiply(a,b);
         case "/":
-            return divide(a,b);
+            return roundResult(divide(a,b));
         default: 
             return "ERROR";
     }
+}
+
+function roundResult(number) {
+    return (Math.round(number * (10 ** 5))) / (10 ** 5);
 }
 
 //Updating display
@@ -56,33 +64,42 @@ function updateDisplay(method, newNumber) {
             break;
         case 'clearDisplayAndNumbers':
             calculatorDisplay.textContent = "";
-            savedOperation = null;
-            savedNumber = null;
+            clearSavedData();
             break;
     }
+}
+
+function clearSavedData() {
+    savedOperation = null;
+    savedNumber = null;
 }
 
 //Default page load - add listeners
 
 function loadDefault() {
     numberButtons.forEach(element => element
-        .addEventListener('click', e => updateDisplay('numberPress', e.target.textContent)
-   ));
+        .addEventListener('click', function(e){
+            if ( savedOperation && (calculatorDisplay.textContent === "" || calculatorDisplay.textContent == savedNumber)) {
+                updateDisplay('clearDisplay');
+                updateDisplay('numberPress', e.target.textContent);
+            } else {
+                updateDisplay('numberPress', e.target.textContent);
+            }       
+    }));
 
     operatorButtons.forEach(element => element
         .addEventListener('click', e => {
 
             const localSavedNumber = +calculatorDisplay.textContent;
             const localSavedOperation = e.target.textContent;
-            
-            console.log(`operator of ${localSavedOperation} and number of ${localSavedNumber}`)
+
             if ( !savedOperation || !savedNumber ) {
                 savedNumber = localSavedNumber;
                 savedOperation = localSavedOperation;
                 updateDisplay('clearDisplay');
                 return true;
             } else {
-                let result = operate(localSavedOperation, savedNumber, localSavedNumber);
+                let result = operate(savedOperation, savedNumber, localSavedNumber);
                 updateDisplay('resolveOperation', result);
 
                 savedNumber = result;
@@ -95,7 +112,6 @@ function loadDefault() {
     equalsButton.addEventListener('click', () => {
         const localSavedNumber = +calculatorDisplay.textContent;
 
-        console.log(`operator of ${savedOperation} and number of ${localSavedNumber}`)
         if ( !savedOperation || !savedNumber ) {
             updateDisplay('clearDisplay');
             return true;

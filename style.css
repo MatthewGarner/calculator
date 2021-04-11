@@ -5,12 +5,10 @@
 }
 
 .calculator-button {
-    border-color: indigo;
-    border-style: solid;
     margin: 2% 10px 10px 2%;
     align-content: center;
     justify-content: center;
-  
+    cursor: pointer; 
 }
 
 .number-input {
@@ -26,28 +24,24 @@
 }
 
 #calculator {
-    width: 800px;
-    margin: 10vmin auto;
-    /*background-color: rgb(207, 241, 236);*/
-    /*border-style: solid;*/
-    
+    width: 60vw;
+    margin: 7vh auto;
 }
 
 #calculator-pad {
     display: grid;
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, auto);
-    font-size: 8vh;
+    font-size: 7vh;
 }
 
 #calculator-output {
     background-color: black;
-    border-style: solid;
-    border-color: orange;
     color: white;
     font-size: 9vh;
-    padding: 0.5em 0 0.5em 0;
+    height: 15vh;
     margin-bottom: 5vmin;
+
 }
 
 #button-1 {
@@ -108,4 +102,9 @@
 
 #button-equals {
     grid-area: 5 / 4 / span 1 / span 1;
+}
+
+#button-clear {
+    grid-area: 1 / 1 / span 1 / span 1;
+    background-color: hotpink;
 }

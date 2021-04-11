@@ -1,7 +1,13 @@
+//Global vars
+let savedNumber;
+let savedOperation;
+
 //Select dynamic content areas
 const calculatorDisplay = document.getElementById('calculator-output');
 const numberButtons = document.querySelectorAll('.number-input');
 const operatorButtons = document.querySelectorAll('.operator-input');
+const clearButton = document.getElementById('button-clear');
+const equalsButton = document.getElementById('button-equals');
 
 //Basic functions for maths operations
 function add(a, b) {
@@ -48,31 +54,62 @@ function updateDisplay(method, newNumber) {
         case 'clearDisplay':
             calculatorDisplay.textContent = "";
             break;
+        case 'clearDisplayAndNumbers':
+            calculatorDisplay.textContent = "";
+            savedOperation = null;
+            savedNumber = null;
+            break;
     }
 }
 
-//Default page load
-    //TODO - Define default behaviour
+//Default page load - add listeners
+
 function loadDefault() {
     numberButtons.forEach(element => element
         .addEventListener('click', e => updateDisplay('numberPress', e.target.textContent)
    ));
 
+    operatorButtons.forEach(element => element
+        .addEventListener('click', e => {
 
-    operatorButtons.forEach(element => element.addEventListener('click', e => console.log(e.target.textContent)));
+            const localSavedNumber = +calculatorDisplay.textContent;
+            const localSavedOperation = e.target.textContent;
+            
+            console.log(`operator of ${localSavedOperation} and number of ${localSavedNumber}`)
+            if ( !savedOperation || !savedNumber ) {
+                savedNumber = localSavedNumber;
+                savedOperation = localSavedOperation;
+                updateDisplay('clearDisplay');
+                return true;
+            } else {
+                let result = operate(localSavedOperation, savedNumber, localSavedNumber);
+                updateDisplay('resolveOperation', result);
+
+                savedNumber = result;
+                savedOperation = localSavedOperation;
+            }
+        }));
+
+    clearButton.addEventListener('click', () => updateDisplay('clearDisplayAndNumbers'));
+
+    equalsButton.addEventListener('click', () => {
+        const localSavedNumber = +calculatorDisplay.textContent;
+
+        console.log(`operator of ${savedOperation} and number of ${localSavedNumber}`)
+        if ( !savedOperation || !savedNumber ) {
+            updateDisplay('clearDisplay');
+            return true;
+        } else {
+            let result = operate(savedOperation, savedNumber, localSavedNumber);
+            updateDisplay('resolveOperation', result);
+
+            savedNumber = result;
+            savedOperation = null;
+        }
+    });
+
+    console.log('page loaded');
 }
 
+
 loadDefault();
-
-//Add event listeners for inputs
-
-
-
-/*
-Create the functions that populate the display when you click the number buttons… 
-you should be storing the ‘display value’ in a variable somewhere for use in the next step.
-*/
-
-//listen for button press
-//check which key was pressed and match to number
-//add number to screen display

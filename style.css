@@ -9,6 +9,7 @@
     align-content: center;
     justify-content: center;
     cursor: pointer; 
+    border-radius: 20px;
 }
 
 .number-input {

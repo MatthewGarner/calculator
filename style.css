@@ -34,7 +34,7 @@
 
 #calculator-pad {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: repeat(5, auto);
     font-size: 7vh;
 }
@@ -110,4 +110,10 @@
 
 #button-clear {
     grid-area: 1 / 1 / span 1 / span 1;
+}
+
+@media only screen and (max-width:500px) {
+    #button-clear {
+        content: "C";
+    }
 }

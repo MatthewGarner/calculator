@@ -1,0 +1,43 @@
+body {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: darkred;
+    font-size: larger;
+}
+
+button {
+    border-radius: 10%;
+    font-size: 30pt;
+}
+
+.calculator-container {
+    margin: 20px auto;
+    padding: 40px; 
+}
+
+.keypad-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.numpad {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.operations {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.display-area {
+    border-style: solid;
+    border-color: aqua;
+    border-width: 3px;
+    margin: 10px auto;
+    text-align: center;
+}

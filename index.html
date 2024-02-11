@@ -4,14 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <h1 class="page-title">A simple calculator</h1>
     <div class="calculator-container">
         <div class="display-area">
-            <p class="number-display"></p>
+            <p class="number-display">0</p>
         </div>
         <div class="keypad-area">
+            <div class="operations">
+                <button type="button"  name="+">+</button>
+                <button type="button" name="-">-</button>
+                <button type="button" name="*">*</button>
+                <button type="button" name="/">/</button>
+                <button type="button" name="=">=</button>
+                <button type="button" name="clear">C</button>
+            </div>
             <div class="numpad">
                 <button type="button" name="1">1</button>
                 <button type="button" name="2">2</button>
@@ -24,13 +33,7 @@
                 <button type="button" name="9">9</button>
                 <button type="button" name="0">0</button>
             </div>
-            <div class="operations">
-                <button type="button" name="+">+</button>
-                <button type="button" name="-">-</button>
-                <button type="button" name="*">*</button>
-                <button type="button" name="/">/</button>
-                <button type="button" name="=">=</button>
-            </div>
+           
         </div> 
     </div>
 </body>

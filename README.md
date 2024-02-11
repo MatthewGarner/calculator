@@ -20,7 +20,7 @@ Done:
 - [X] Add function to update display
 - [X] Wire up HTML + JS
 
-
+Brief: [The Odin Project](https://www.theodinproject.com/lessons/foundations-calculator)
 
 
 

@@ -24,6 +24,9 @@ function multiply (num1, num2) {
 };
 
 function divide (num1, num2) {
+    if (num2 == 0) {
+        return null;
+    }
     return num1 / num2;
 };
 
@@ -64,6 +67,19 @@ function updateDisplay (currentValue) {
     return;
 };
 
+function setOperation (operationPressed) {
+            operator = operationPressed;
+            firstNum = displayValue;
+            displayValue = '';
+}
+
+function clearDisplay() {
+    firstNum = '';
+    secondNum = '';
+    displayValue = '';
+    updateDisplay (displayValue);
+}
+
 //Event Listeners
 numKeys.forEach(function(button) {
     button.addEventListener("click", e => {
@@ -83,23 +99,27 @@ operationsKeys.forEach(function(button) {
     button.addEventListener("click", e => {
         const operationPressed = e.target.name;
 
-        if (operationPressed === '=') {
-            secondNum = displayValue;
-            operate(operator, firstNum, secondNum);
-            firstNum = displayValue;
-        } else if (operationPressed === 'clear') {
-            firstNum = '';
-            secondNum = '';
-            displayValue = '';
-            updateDisplay (displayValue);
-        } else {
-            operator = operationPressed;
-            firstNum = displayValue;
-            displayValue = '';
+        switch(operationPressed) {
+            case '=': 
+                secondNum = displayValue;
+                firstNum = operate(operator, firstNum, secondNum);
+                operator = null;
+                break;
+            case 'clear':
+                clearDisplay();
+                break;
+            default:
+                setOperation(operationPressed);
         }
-
-
     });
 });
 
 
+//I type number 1 
+//I click add
+//Number 1 is saved to firstNum from displayValue
+
+//I type number 2 
+//I press equals
+//I use firstNum and display Value to calculate result
+//I store result in firstNum

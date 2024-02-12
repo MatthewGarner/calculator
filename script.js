@@ -1,7 +1,7 @@
 //Calculator Variables
 let firstNum; 
 let secondNum;
-let operator;
+let currentOperator = null;
 let displayValue = 0;
 
 
@@ -60,6 +60,13 @@ function operate(operator, num1, num2) {
     return result;
 };
 
+function clearDisplay() {
+    firstNum = '';
+    secondNum = '';
+    displayValue = '';
+    currentOperator = null;
+    updateDisplay (displayValue);
+}
 
 //takes an operator and 2 numbers and then calls one of the above functions on the numbers.
 function updateDisplay (currentValue) {
@@ -67,32 +74,39 @@ function updateDisplay (currentValue) {
     return;
 };
 
+function handleNumpadInput (e) {
+    const numInput = e.target.name;
+
+    if(displayValue === 0) {
+        displayValue = numInput;
+    } else {
+        displayValue = parseInt(displayValue + numInput.toString());
+    }
+
+    updateDisplay(displayValue);
+}
+
+
 function setOperation (operationPressed) {
-            operator = operationPressed;
-            firstNum = displayValue;
-            displayValue = '';
-}
 
-function clearDisplay() {
-    firstNum = '';
-    secondNum = '';
+    if (currentOperator !== null) {
+        saveCurrentNumber(displayValue);
+        firstNum = operate(currentOperator, firstNum, secondNum);
+    }
+
+    currentOperator = operationPressed;
+    saveCurrentNumber(displayValue);
     displayValue = '';
-    updateDisplay (displayValue);
 }
 
-//Event Listeners
+function saveCurrentNumber (num) {
+    (!firstNum) ? firstNum = num : secondNum = num;
+    return num;
+}
+
+//Add Listeners to keys
 numKeys.forEach(function(button) {
-    button.addEventListener("click", e => {
-        const numInput = e.target.name;
-
-        if(displayValue === 0) {
-            displayValue = numInput;
-        } else {
-            displayValue = parseInt(displayValue + numInput.toString());
-        }
-
-        updateDisplay(displayValue);
-    });
+    button.addEventListener("click", handleNumpadInput);
 });
 
 operationsKeys.forEach(function(button) {
@@ -101,9 +115,13 @@ operationsKeys.forEach(function(button) {
 
         switch(operationPressed) {
             case '=': 
-                secondNum = displayValue;
-                firstNum = operate(operator, firstNum, secondNum);
-                operator = null;
+                if (!currentOperator) {
+                    return;
+                }
+                saveCurrentNumber(displayValue);
+                firstNum = operate(currentOperator, firstNum, secondNum); 
+                
+                currentOperator = null;
                 break;
             case 'clear':
                 clearDisplay();
@@ -113,13 +131,3 @@ operationsKeys.forEach(function(button) {
         }
     });
 });
-
-
-//I type number 1 
-//I click add
-//Number 1 is saved to firstNum from displayValue
-
-//I type number 2 
-//I press equals
-//I use firstNum and display Value to calculate result
-//I store result in firstNum
